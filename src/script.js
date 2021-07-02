@@ -8,18 +8,19 @@ window.addEventListener('load',mapDisplay(28.7041, 77.1025));
       else{
       map.remove();
        
-        var API_KEY="44b5154c6e7b4a418847327bf7840615";
+        var API_KEY="067c8fbb17dde34e18da148f49b95ae4fa7e69c0a4dc875d68d0d51bb1841d7f";
 
-       var url="https://api.ipgeolocation.io/ipgeo?apiKey="+API_KEY+"&ip="+ip;
+      
+       var url="https://api.ipinfodb.com/v3/ip-city/?key="+API_KEY+"&ip="+ip+"&format=json"
       
        $.get(url,function(data){
       var latitude=parseFloat(data.latitude);
       var longitude=parseFloat(data.longitude);
-      console.log(data);
       
-        $('#city').html(data.city)
-        $('#country').html(data.country_name);
-        $('#flag').attr("src",data.country_flag)
+        $('#city').html(data.cityName)
+        $('#country').html(data.countryName);
+        var flag=(data.countryCode).toLowerCase();
+        $('#flag').attr("src","https://ipgeolocation.io/static/flags/"+flag+"_64.png")
        mapDisplay(latitude,longitude);
       
        });
